@@ -3,13 +3,9 @@ import java.util.HashMap;
 public class Levenshtein {
     public static void main(String[] args) {
 
-        System.out.println(LevQWERTY("kot", "kita"));
-        System.out.println(LevQWERTY("kwiat", "kwist"));
-        System.out.println(LevQWERTY("drab", "dal"));
-
     }
 
-    private static double LevQWERTY(String firstWord, String secondWord) {
+    public static double LevQWERTY(String firstWord, String secondWord) {
         HashMap<String, String> neighbors = new HashMap<>();
         String[] keyboard = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
 
