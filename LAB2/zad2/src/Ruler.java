@@ -1,6 +1,6 @@
 public class Ruler {
     public static void main(String[] args) {
-        drawRuler(3, 3);
+        drawRuler(2, 5);
     }
 
     /**
@@ -10,7 +10,7 @@ public class Ruler {
      * @param nesting poziom zagniezdzenia
      */
     private static void drawRuler(int length, int nesting) {
-        int majorLength = nesting * 2 + 2;
+        int majorLength = nesting * 2;
         drawOneTick(majorLength, nesting, 0);
         for (int i = 1; i <= length; i++) {
             drawTicks(majorLength - 2, nesting);
@@ -40,11 +40,11 @@ public class Ruler {
      * @param label wartosc
      */
     private static void drawOneTick(int tickLength, int nesting, int label) {
-        for (int i = 0; i < nesting - (tickLength - 2) / 2; i++)
+        for (int i = 0; i < nesting - tickLength  / 2; i++)
             System.out.print(" ");
         for (int i = 0; i < tickLength; i++)
             System.out.print("-");
-        for (int i = 0; i < nesting - (tickLength - 2) / 2; i++)
+        for (int i = 0; i < nesting - tickLength / 2; i++)
             System.out.print(" ");
         if (label >= 0) System.out.print(" " + label);
         System.out.print("\n");
