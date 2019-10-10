@@ -1,7 +1,6 @@
+package ruler;
+
 public class Ruler {
-    public static void main(String[] args) {
-        drawRuler(2, 5);
-    }
 
     /**
      * Rysuje dwustronna linijke o zadanych dlugosci i poziomie zagniezdzenia
@@ -9,13 +8,23 @@ public class Ruler {
      * @param length dlugosc linijki
      * @param nesting poziom zagniezdzenia
      */
-    private static void drawRuler(int length, int nesting) {
+    public static void drawRuler(int length, int nesting) {
+        if(length > 0) {
+            drawRuler(length - 1, nesting);
+            drawTicks(nesting * 2 - 2, nesting);
+            drawOneTick(nesting * 2, nesting, length);
+        } else if(length == 0)
+            drawOneTick(nesting * 2, nesting, length);
+
+
+        /*
         int majorLength = nesting * 2;
         drawOneTick(majorLength, nesting, 0);
         for (int i = 1; i <= length; i++) {
             drawTicks(majorLength - 2, nesting);
             drawOneTick(majorLength, nesting, i);
         }
+        */
     }
 
     /**
@@ -24,7 +33,7 @@ public class Ruler {
      * @param tickLength dlugosc podzialki
      * @param nesting poziom zagniezdzenia linijki
      */
-    private static void drawTicks(int tickLength, int nesting) {
+    static void drawTicks(int tickLength, int nesting) {
         if (tickLength > 0) {
             drawTicks(tickLength - 2, nesting);
             drawOneTick(tickLength, nesting);
@@ -39,13 +48,25 @@ public class Ruler {
      * @param nesting zagniezdzenie
      * @param label wartosc
      */
-    private static void drawOneTick(int tickLength, int nesting, int label) {
-        for (int i = 0; i < nesting - tickLength  / 2; i++)
+    static void drawOneTick(int tickLength, int nesting, int label) {
+        /*
+        for (int i = 0; i < nesting - tickLength / 2; i++)
             System.out.print(" ");
         for (int i = 0; i < tickLength; i++)
             System.out.print("-");
         for (int i = 0; i < nesting - tickLength / 2; i++)
             System.out.print(" ");
+        */
+
+        /*
+        System.out.print(stringRepeater(" ", nesting - tickLength / 2));
+        System.out.print(stringRepeater("-", tickLength));
+        System.out.print(stringRepeater(" ", nesting - tickLength / 2));
+        */
+
+        System.out.print(" ".repeat(nesting - tickLength / 2));
+        System.out.print("-".repeat(tickLength));
+        System.out.print(" ".repeat(nesting - tickLength / 2));
         if (label >= 0) System.out.print(" " + label);
         System.out.print("\n");
     }
@@ -56,7 +77,20 @@ public class Ruler {
      * @param tickLength dlugosc podzialki
      * @param nesting zagniezdzenie
      */
-    private static void drawOneTick(int tickLength, int nesting) {
+    static void drawOneTick(int tickLength, int nesting) {
         drawOneTick(tickLength, nesting, -1);
+    }
+
+
+    /**
+     * Powtarza podany String n razy
+     *
+     * @param toRepeat napis do powtorzenia
+     * @param n ilosc powtorzen
+     * @return toRepeat powtorzone n razy
+     */
+    static String stringRepeater(String toRepeat, int n) {
+        if(n > 0) return stringRepeater(toRepeat, n - 1) + toRepeat;
+        return "";
     }
 }
