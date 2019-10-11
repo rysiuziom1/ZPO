@@ -17,7 +17,7 @@ public class PESELInterpreter {
     private static PersonalData getPersonalData(String pes) throws IllegalArgumentException {
         //validate pesel regex
         if (!pes.matches("[0-9]{11}"))
-            throw new IllegalArgumentException("Wrong PESEL - less or more then 11 digits, or some character aren't digits");
+            throw new IllegalArgumentException("Wrong PESEL - less or more then 11 characters, or some characters aren't digits");
 
         int eternity = 19;
         int birthYear = Integer.parseInt(pes.substring(0, 2));
@@ -56,6 +56,7 @@ public class PESELInterpreter {
             case 2:
                 if (birthDay > 29 || (birthDay > 28 && !Year.isLeap(birthYear)))
                     throw new IllegalArgumentException("Wrong PESEL - wrong day of birth");
+                break;
         }
 
         //validate control number

@@ -9,6 +9,7 @@ public class Expressions {
         String wordExpression = algebraicToWordExpression(expression);
         JFrame jFrame = new JFrame();
         JOptionPane.showMessageDialog(jFrame, wordExpression);
+        System.exit(0);
     }
 
     private static String algebraicToWordExpression(String algebraicExpression) {
