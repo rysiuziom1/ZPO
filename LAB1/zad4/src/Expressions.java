@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class Expressions {
     public static void main(String[] args) {
         String expression = JOptionPane.showInputDialog("Please input algebraic expression");
-        if(!expression.matches("[0-9]{1,2} [+\\-*] [0-9]{1,2} [+\\-*] [0-9]{1,2}"))
+        if(!expression.matches("-?[0-9]{1,2} [+\\-*] -?[0-9]{1,2} [+\\-*] -?[0-9]{1,2}"))
             throw new IllegalArgumentException("Wrong algebraic expression");
         String wordExpression = algebraicToWordExpression(expression);
         JFrame jFrame = new JFrame();
@@ -12,7 +12,7 @@ public class Expressions {
         System.exit(0);
     }
 
-    private static String algebraicToWordExpression(String algebraicExpression) {
+    public static String algebraicToWordExpression(String algebraicExpression) {
         //create numbers's map
         HashMap<String, String> numberMap = new HashMap<>();
         String[] belowTwenty = {"zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem",
@@ -34,6 +34,12 @@ public class Expressions {
         String[] exprComponents = algebraicExpression.split(" ");
         StringBuilder sb = new StringBuilder();
         for(String s : exprComponents) {
+            if(s.startsWith("-") && s.length() > 1) {
+                sb.append("minus").append(" ");
+                s = s.substring(1);
+            }
+            if(s.startsWith("0") && s.length() > 1)
+                s = String.valueOf(s.charAt(1));
             sb.append(numberMap.get(s)).append(" ");
         }
         return sb.toString();

@@ -83,7 +83,7 @@ public class Ruler {
 
 
     /**
-     * Powtarza podany String n razy
+     * Zwraca podany String powtorzony n razy
      *
      * @param toRepeat napis do powtorzenia
      * @param n ilosc powtorzen
