@@ -15,6 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/cyclists.fxml"));
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> System.exit(0));
     }
