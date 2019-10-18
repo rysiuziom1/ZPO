@@ -2,10 +2,12 @@ import java.util.HashMap;
 
 public class Levenshtein {
     public static void main(String[] args) {
-
+        String s1 = "alma";
+        String s2 = "alarm";
+        System.out.println(LevQWERTY(s1, s2));
     }
 
-    public static double LevQWERTY(String firstWord, String secondWord) {
+    static double LevQWERTY(String firstWord, String secondWord) {
         HashMap<String, String> neighbors = new HashMap<>();
         String[] keyboard = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
 
