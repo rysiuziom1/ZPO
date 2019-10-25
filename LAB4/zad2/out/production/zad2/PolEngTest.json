@@ -1,0 +1,52 @@
+{
+  "krzyczeć": [
+    "cry",
+    "shout",
+    "scream"
+  ],
+  "skakać": [
+    "jump",
+    "leap",
+    "bounce"
+  ],
+  "pisać": [
+    "write",
+    "describe"
+  ],
+  "kultywator": [
+    "cultivator"
+  ],
+  "zamożny": [
+    "wealthy",
+    "rich",
+    "affluent"
+  ],
+  "skąpy": [
+    "stingy",
+    "skimpy",
+    "miserly"
+  ],
+  "upadek": [
+    "fall",
+    "collapse",
+    "drop",
+    "downfall"
+  ],
+  "złośliwy": [
+    "malicious",
+    "malignant",
+    "mischievous",
+    "mean",
+    "spiteful"
+  ],
+  "żal": [
+    "regret",
+    "grief",
+    "sorrow"
+  ],
+  "wątpliwy": [
+    "doubtful",
+    "dubious",
+    "questionable"
+  ]
+}
