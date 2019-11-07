@@ -1,7 +1,7 @@
 package utils;
 
 public class Levenshtein {
-    public static int LevQWERTY(String firstWord, String secondWord) {
+    static int LevQWERTY(String firstWord, String secondWord) {
         int[][] levTable = new int[firstWord.length() + 1][secondWord.length() + 1];
 
         for (int i = 0; i <= firstWord.length(); i++)

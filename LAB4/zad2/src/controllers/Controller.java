@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import utils.Levenshtein;
+import utils.ResultCounter;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -57,6 +58,17 @@ public class Controller {
         try {
             questionArray = new Label[]{question1, question2, question3, question4, question5};
             answersArray = new TextField[]{answer1, answer2, answer3, answer4, answer5};
+            for (TextField tf : answersArray) {
+                tf.setOnKeyPressed(e -> {
+                    if(e.getCode() == KeyCode.ENTER) {
+                        try {
+                            sendQuiz();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+            }
             Random rand = new Random();
             Reader reader = new FileReader("src/PolEngTest.json");
             Type genericType = new TypeToken<HashMap<String, List<String>>>() {
@@ -91,14 +103,7 @@ public class Controller {
         fileWriter.write(json);
         fileWriter.close();
 
-        for (String q : questionsAndAnswers.keySet()) {
-            String answer = questionsAndAnswers.get(q);
-            for (String a : database.get(q)) {
-                int levDistance = Levenshtein.LevQWERTY(answer, a);
-                result += (levDistance > 1) ? 0.0 : ((levDistance > 0) ? 0.5 : 1.0);
-                if (levDistance <= 1) break;
-            }
-        }
+        result = ResultCounter.check(questionsAndAnswers, database);
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/resultsView.fxml"));
         Pane pane = null;
