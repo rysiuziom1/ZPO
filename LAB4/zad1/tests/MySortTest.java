@@ -1,26 +1,26 @@
-import org.junit.Before;
 import org.junit.Test;
 
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class MySortTest {
     private String[] names;
     private String[] names2;
     private Collator collator = Collator.getInstance(new Locale("pl", "PL"));
 
-    private void createNamesArrays() {
-        names = new String[]{"Łukasz", "Ścibor", "Stefania", "Darek", "Agnieszka",
-                "Zyta", "Órszula", "Świętopełk"};
-        names2 = Arrays.copyOf(names, names.length);
-    }
-
     private void createNamesArray() {
         names = new String[]{"Łukasz", "Ścibor", "Stefania", "Darek", "Agnieszka",
                 "Zyta", "Órszula", "Świętopełk"};
+    }
+
+    private void createNamesArrays() {
+//        names = new String[]{"Łukasz", "Ścibor", "Stefania", "Darek", "Agnieszka",
+//                "Zyta", "Órszula", "Świętopełk"};
+        createNamesArray();
+        names2 = Arrays.copyOf(names, names.length);
     }
 
     @Test
