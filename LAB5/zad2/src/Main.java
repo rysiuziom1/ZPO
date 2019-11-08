@@ -23,28 +23,12 @@ public class Main {
             e.printStackTrace();
             System.exit(1);
         }
-        List<String> learnedWords = new ArrayList<>();
-        Random rand = new Random();
-        for (int i = 0; i < n; i++) {
-            learnedWords.add(words.remove(rand.nextInt(words.size() - 1)));
-            learnedWords.add(words.remove(rand.nextInt(words.size() - 1)));
-            List<String> forgottenWords = new ArrayList<>();
-            for (int j = 0; j < 2; j++) {
-                int bound = learnedWords.size() - k * 2;
-                if(bound > 0) {
-                    int toForget = rand.nextInt(bound);
-                    double probability = rand.nextDouble();
-                    if (toForget >= 0 && probability >= 0.5d) {
-                        String forgottenWord = learnedWords.remove(toForget);
-                        words.add(forgottenWord);
-                        forgottenWords.add(forgottenWord);
-                    }
-                }
-            }
+        WordsCollection wordsCollection = new WordsCollection();
+        for(int i = 0; i < n; i++) {
+            wordsCollection.learnWords(words);
+            wordsCollection.forgetWords(words, k);
             System.out.println("Day " + (i + 1));
-            System.out.println("New words: \t" + learnedWords.get(learnedWords.size() - 2) + " " + learnedWords.get(learnedWords.size() - 1));
-            System.out.println("Forgotten words: " + forgottenWords);
-            System.out.println(learnedWords);
+            System.out.println(wordsCollection);
         }
     }
 }
