@@ -13,7 +13,7 @@ public class DateExercises {
 
     public static long specificDigitsSumBetweenHoursCounter(LocalTime startTime, LocalTime endTime, int expectedSumOfDigits) {
         long count = 0;
-        while(!startTime.equals(endTime)) {
+        while (!startTime.isAfter(endTime)) {
             int sumOfDigits = 0, hour = startTime.getHour(), minute = startTime.getMinute();
             sumOfDigits += hour % 10 + hour / 10 + minute % 10 + minute / 10;
             if (sumOfDigits == expectedSumOfDigits) count++;
@@ -22,14 +22,18 @@ public class DateExercises {
         return count;
     }
 
-    public static short howMany29FebInLife(LocalDate birthDate) {
+    public static short howMany29FebInLife(LocalDate birthDate, LocalDate endDate) {
         short count = 0;
         LocalDate year = LocalDate.of(birthDate.getYear(), 3, 1);
-        if(birthDate.getMonthValue() >= 3) year = year.plusYears(1);
-        while (year.isBefore(LocalDate.now())) {
-            if(year.isLeapYear()) count++;
+        if (birthDate.getMonthValue() >= 3) year = year.plusYears(1);
+        while (year.isBefore(endDate)) {
+            if (year.isLeapYear()) count++;
             year = year.plusYears(1);
         }
         return count;
+    }
+
+    public static short howMany29FebInLife(LocalDate birthDate) {
+        return howMany29FebInLife(birthDate, LocalDate.now());
     }
 }
