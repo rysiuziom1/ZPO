@@ -30,22 +30,19 @@ public class WordsCollection {
             if (bound > 0) {
                 int toForgetIndex = rand.nextInt(bound);
                 String toForget = learnedWords.get(toForgetIndex);
-                if(rand.nextDouble() > 0.5d)
+                if(rand.nextDouble() > 0.5d) {
                     actuallyForgottenWords.add(toForget);
+                    learnedWords.remove(toForget);
+                }
             }
         }
-        learnedWords.removeAll(actuallyForgottenWords);
         wordDatabase.addAll(actuallyForgottenWords);
     }
 
     @Override
     public String toString() {
-        return "New words: " +
-                actuallyLearnedWords +
-                "\nForgotten words: " +
-                actuallyForgottenWords +
-                "\n" +
-                learnedWords +
-                "\n";
+        return "New words: " + actuallyLearnedWords +
+                "\nForgotten words: " + actuallyForgottenWords +
+                "\n" + learnedWords + "\n";
     }
 }

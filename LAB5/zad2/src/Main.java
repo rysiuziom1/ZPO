@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Main {
     final static private int n = 10, k = 3;
@@ -24,7 +23,7 @@ public class Main {
             System.exit(1);
         }
         WordsCollection wordsCollection = new WordsCollection();
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             wordsCollection.learnWords(words);
             wordsCollection.forgetWords(words, k);
             System.out.println("Day " + (i + 1));

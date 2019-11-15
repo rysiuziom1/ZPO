@@ -14,8 +14,9 @@ public class Bisection {
             listOfXs.add(startValueBD);
             startValueBD = startValueBD.add(stepBD);
         }
-        BigDecimal epsBD = BigDecimal.valueOf(0.000001d);
-
+        if(poly.eval(listOfXs.get(0).doubleValue()).compareTo(poly.eval(startValueBD.subtract(stepBD).doubleValue())) > 0)
+            Collections.reverse(listOfXs);
+        BigDecimal epsBD = BigDecimal.valueOf(0.0001d);
         int xIndex = Collections.binarySearch(
                 listOfXs,
                 BigDecimal.valueOf(0.0d),

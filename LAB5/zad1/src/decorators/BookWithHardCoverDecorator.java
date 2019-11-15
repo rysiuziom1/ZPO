@@ -5,9 +5,11 @@ import interfaces.Publication;
 public class BookWithHardCoverDecorator extends BookDecorator {
     public BookWithHardCoverDecorator(Publication book) {
         super(book);
-        if(book.getClass() == this.getClass() || book.getClass() == BookWithSoftCoverDecorator.class) {
-            throw new IllegalArgumentException("books.Book already has cover");
+        this.listOfClasses = book.getListOfClasses();
+        if(book.contains(this.getClass()) || book.contains(BookWithSoftCoverDecorator.class)) {
+            throw new IllegalArgumentException("Book already has cover");
         }
+        this.addClass(this.getClass());
     }
 
     @Override

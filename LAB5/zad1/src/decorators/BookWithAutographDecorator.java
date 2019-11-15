@@ -7,9 +7,12 @@ public class BookWithAutographDecorator extends BookDecorator {
 
     public BookWithAutographDecorator(Publication book, String autograph) {
         super(book);
-        if (book.getClass() == this.getClass())
-            throw new IllegalArgumentException("books.Book already has autograph");
+        this.listOfClasses = book.getListOfClasses();
+        if (book.contains(this.getClass())) {
+            throw new IllegalArgumentException("Book already has autograph");
+        }
         this.autograph = autograph;
+        this.addClass(this.getClass());
     }
 
     @Override

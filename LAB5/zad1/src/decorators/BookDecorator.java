@@ -2,8 +2,12 @@ package decorators;
 
 import interfaces.Publication;
 
-public abstract class BookDecorator implements Publication{
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class BookDecorator implements Publication {
     Publication book;
+    List<Class> listOfClasses = new ArrayList<>();
 
     BookDecorator(Publication book) {
         this.book = book;
@@ -22,5 +26,20 @@ public abstract class BookDecorator implements Publication{
     @Override
     public int getPages() {
         return book.getPages();
+    }
+
+    @Override
+    public boolean contains(Class c) {
+        return listOfClasses.contains(c);
+    }
+
+    @Override
+    public void addClass(Class c) {
+        listOfClasses.add(c);
+    }
+
+    @Override
+    public List<Class> getListOfClasses() {
+        return new ArrayList<>(listOfClasses);
     }
 }

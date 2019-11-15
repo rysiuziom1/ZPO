@@ -14,6 +14,6 @@ public class Main {
         System.out.println(DateExercises.specificDigitsSumBetweenHoursCounter(LocalTime.of(11, 45), LocalTime.of(22, 30), 15));
 
         //d
-        System.out.println(DateExercises.howMany29FebInLife(LocalDate.of(1997, 4, 24)));
+        System.out.println(DateExercises.howMany29FebInLife(LocalDate.of(2004, 3, 24)));
     }
 }

@@ -5,10 +5,14 @@ import interfaces.Publication;
 public class BookWithDustCoverDecorator extends BookDecorator {
     public BookWithDustCoverDecorator(Publication book) {
         super(book);
-        if(book.getClass() == this.getClass())
-            throw new IllegalArgumentException("books.Book already has dust cover");
-        else if(book.getClass() != BookWithSoftCoverDecorator.class && book.getClass() != BookWithHardCoverDecorator.class)
-            throw new IllegalArgumentException("books.Book without cover can't have dust cover");
+        this.listOfClasses = book.getListOfClasses();
+        if(book.contains(this.getClass())) {
+            throw new IllegalArgumentException("Book already has dust cover");
+        }
+        else if(!book.contains(BookWithSoftCoverDecorator.class) && !book.contains(BookWithHardCoverDecorator.class)) {
+            throw new IllegalArgumentException("Book without cover can't have dust cover");
+        }
+        this.addClass(this.getClass());
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Main {
 
 //        Publication fakeBook = new decorators.BookWithDustCoverDecorator(k1);
         Publication kkk2 = new BookWithDustCoverDecorator(kk2);
-//        Publication odrzut = new decorators.BookWithDustCoverDecorator(kkk2);
+//        Publication odrzut = new decorators.BookWithHardCoverDecorator(kkk2);
         Publication dziadyZAutografemWieszcza =
                 new BookWithAutographDecorator(kkk2, "Drogiej Hani - Adam Mickiewicz");
 
