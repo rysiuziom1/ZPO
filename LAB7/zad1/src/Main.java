@@ -20,7 +20,7 @@ public class Main {
         int size = 9;
         IntVar[] v = new IntVar[size];
         for(int i = 0; i < size; i++) {
-            v[i] = new IntVar(store, countriesList.get(i), 1, size);
+            v[i] = new IntVar(store, countriesList.get(i), 1, 5);
         }
 
         store.impose(new XneqY(v[0], v[1]));
@@ -44,12 +44,24 @@ public class Main {
         SelectChoicePoint<IntVar> select = new InputOrderSelect<>(store, v, new IndomainMin<>());
         boolean result = search.labeling(store, select);
 
-        if(result) {
-            for(int i = 0; i < size; i++) {
-                System.out.println(countriesList.get(i) + ": " +  colorsMap.get(v[i].value()));
-            }
-        }
-        else
-            System.out.println("nope");
+//        if(result) {
+//            for(int i = 0; i < size; i++) {
+//                System.out.println(countriesList.get(i) + ": " +  colorsMap.get(v[i].value()));
+//            }
+//        }
+//        else
+//            System.out.println("nope");
+
+//        int[][] adjacencyMatrix = new int[9][9];
+//        for(int i = 0; i < 9; i++) {
+//            for(int j = 0; j < 9; j++) {
+//                if(store.getConstraints().contains(new XneqY(v[i], v[j])))
+//                    adjacencyMatrix[i][j] = 1;
+//                else
+//                    adjacencyMatrix[i][j] = 0;
+//                System.out.print(adjacencyMatrix[i][j]);
+//            }
+//            System.out.println();
+//        }
     }
 }
