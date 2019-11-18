@@ -1,9 +1,11 @@
 import org.jacop.constraints.XneqY;
 import org.jacop.core.IntVar;
 import org.jacop.core.Store;
+import org.jacop.core.Var;
 import org.jacop.search.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,24 +46,39 @@ public class Main {
         SelectChoicePoint<IntVar> select = new InputOrderSelect<>(store, v, new IndomainMin<>());
         boolean result = search.labeling(store, select);
 
-//        if(result) {
-//            for(int i = 0; i < size; i++) {
-//                System.out.println(countriesList.get(i) + ": " +  colorsMap.get(v[i].value()));
-//            }
-//        }
-//        else
-//            System.out.println("nope");
+        if(result) {
+            for(int i = 0; i < size; i++) {
+                System.out.println(countriesList.get(i) + ": " +  colorsMap.get(v[i].value()));
+            }
+        }
+        else
+            System.out.println("nope");
 
-//        int[][] adjacencyMatrix = new int[9][9];
-//        for(int i = 0; i < 9; i++) {
-//            for(int j = 0; j < 9; j++) {
-//                if(store.getConstraints().contains(new XneqY(v[i], v[j])))
-//                    adjacencyMatrix[i][j] = 1;
-//                else
-//                    adjacencyMatrix[i][j] = 0;
-//                System.out.print(adjacencyMatrix[i][j]);
-//            }
-//            System.out.println();
-//        }
+        int[][] adjacencyMatrix = new int[9][9];
+        store.getConstraints().forEach(e -> {
+            List<Integer> tmp = e.arguments().stream().map(Var::index).collect(Collectors.toList());
+            adjacencyMatrix[tmp.get(0)][tmp.get(1)] = 1;
+            adjacencyMatrix[tmp.get(1)][tmp.get(0)] = 1;
+        });
+
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++)
+                System.out.print(adjacencyMatrix[i][j] + " ");
+            System.out.println();
+        }
+        System.out.println();
+        System.out.printf("%10s", " ");
+        countriesList.forEach(e -> System.out.printf("%10s", e));
+        System.out.println();
+        for(int i = 0; i < 9; i++) {
+            System.out.printf("%10s", countriesList.get(i));
+            for(int j = 0; j < 9; j++) {
+                if (adjacencyMatrix[i][j] == 1)
+                    System.out.printf("%10s", "x");
+                else
+                    System.out.printf("%10s", ".");
+            }
+            System.out.println();
+        }
     }
 }
