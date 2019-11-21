@@ -10,7 +10,8 @@ public class RNG {
         Random rand = new Random();
         byte[] b = new byte[8];
         for (int i = 0; i < quantity; i++) {
-            ByteBuffer.wrap(b).putDouble(rand.nextGaussian() * stdev + average);
+            double nextGaus = rand.nextGaussian() * stdev + average;
+            ByteBuffer.wrap(b).putDouble(nextGaus);
             writer.write(b);
         }
         writer.close();

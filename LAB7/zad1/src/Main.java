@@ -61,11 +61,17 @@ public class Main {
             adjacencyMatrix[tmp.get(1)][tmp.get(0)] = 1;
         });
 
+        System.out.println();
+        System.out.printf("%10s", " ");
+        countriesList.forEach(e -> System.out.printf("%10s", e));
+        System.out.println();
         for(int i = 0; i < 9; i++) {
+            System.out.printf("%10s", countriesList.get(i));
             for(int j = 0; j < 9; j++)
-                System.out.print(adjacencyMatrix[i][j] + " ");
+                System.out.printf("%10s", adjacencyMatrix[i][j]);
             System.out.println();
         }
+
         System.out.println();
         System.out.printf("%10s", " ");
         countriesList.forEach(e -> System.out.printf("%10s", e));
@@ -73,10 +79,7 @@ public class Main {
         for(int i = 0; i < 9; i++) {
             System.out.printf("%10s", countriesList.get(i));
             for(int j = 0; j < 9; j++) {
-                if (adjacencyMatrix[i][j] == 1)
-                    System.out.printf("%10s", "x");
-                else
-                    System.out.printf("%10s", ".");
+                System.out.printf("%10s", adjacencyMatrix[i][j] == 1 ?  "x" : ".");
             }
             System.out.println();
         }
