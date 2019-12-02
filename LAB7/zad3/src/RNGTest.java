@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.util.LinkedList;
+import java.util.List;
 
 public class RNGTest {
     public static String testRNG(Path filePath) throws IOException {
@@ -12,7 +13,7 @@ public class RNGTest {
 
         InputStream inputStream = new FileInputStream(file);
 
-        LinkedList<Integer> list = new LinkedList<>();
+        List<Integer> list = new LinkedList<>();
         int counter = 0, currentValue;
         byte[] buffer = new byte[4];
         while (inputStream.read(buffer) != -1) {

@@ -21,7 +21,7 @@ public class Main {
 
         int size = 9;
         IntVar[] v = new IntVar[size];
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             v[i] = new IntVar(store, countriesList.get(i), 1, 5);
         }
 
@@ -46,12 +46,11 @@ public class Main {
         SelectChoicePoint<IntVar> select = new InputOrderSelect<>(store, v, new IndomainMin<>());
         boolean result = search.labeling(store, select);
 
-        if(result) {
-            for(int i = 0; i < size; i++) {
-                System.out.println(countriesList.get(i) + ": " +  colorsMap.get(v[i].value()));
+        if (result) {
+            for (int i = 0; i < size; i++) {
+                System.out.println(countriesList.get(i) + ": " + colorsMap.get(v[i].value()));
             }
-        }
-        else
+        } else
             System.out.println("nope");
 
         int[][] adjacencyMatrix = new int[9][9];
@@ -65,9 +64,9 @@ public class Main {
         System.out.printf("%10s", " ");
         countriesList.forEach(e -> System.out.printf("%10s", e));
         System.out.println();
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             System.out.printf("%10s", countriesList.get(i));
-            for(int j = 0; j < 9; j++)
+            for (int j = 0; j < 9; j++)
                 System.out.printf("%10s", adjacencyMatrix[i][j]);
             System.out.println();
         }
@@ -76,10 +75,10 @@ public class Main {
         System.out.printf("%10s", " ");
         countriesList.forEach(e -> System.out.printf("%10s", e));
         System.out.println();
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             System.out.printf("%10s", countriesList.get(i));
-            for(int j = 0; j < 9; j++) {
-                System.out.printf("%10s", adjacencyMatrix[i][j] == 1 ?  "x" : ".");
+            for (int j = 0; j < 9; j++) {
+                System.out.printf("%10s", adjacencyMatrix[i][j] == 1 ? "x" : ".");
             }
             System.out.println();
         }
