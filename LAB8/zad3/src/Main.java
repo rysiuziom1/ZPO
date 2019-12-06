@@ -1,6 +1,8 @@
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
@@ -8,19 +10,16 @@ public class Main {
         String[] strings = {"aaaa", "bb", "ccccccccccccc", "dddddd"};
         AtomicInteger atomicInteger = new AtomicInteger(0);
 
-        MyRunnable task1 = new MyRunnable(atomicInteger, strings[0]);
-        MyRunnable task2 = new MyRunnable(atomicInteger, strings[1]);
-        MyRunnable task3 = new MyRunnable(atomicInteger, strings[2]);
-        MyRunnable task4 = new MyRunnable(atomicInteger, strings[3]);
+        MyRunnable t1 = new MyRunnable(atomicInteger, strings[0]);
+        MyRunnable t2 = new MyRunnable(atomicInteger, strings[1]);
+        MyRunnable t3 = new MyRunnable(atomicInteger, strings[2]);
+        MyRunnable t4 = new MyRunnable(atomicInteger, strings[3]);
 
-        Thread t1 = new Thread(task1);
-        Thread t2 = new Thread(task2);
-        Thread t3 = new Thread(task3);
-        Thread t4 = new Thread(task4);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
+        executorService.execute(t1);
+        executorService.execute(t2);
+        executorService.execute(t3);
+        executorService.execute(t4);
     }
 }
