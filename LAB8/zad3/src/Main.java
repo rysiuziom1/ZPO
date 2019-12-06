@@ -1,11 +1,17 @@
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Main {
     public static void main(String[] args) {
         String[] strings = {"aaaa", "bb", "ccccccccccccc", "dddddd"};
+        AtomicInteger atomicInteger = new AtomicInteger(0);
 
-        PrintSequenceRunnable task1 = new PrintSequenceRunnable(3, strings[0]);
-        PrintSequenceRunnable task2 = new PrintSequenceRunnable(2, strings[1]);
-        PrintSequenceRunnable task3 = new PrintSequenceRunnable(0, strings[2]);
-        PrintSequenceRunnable task4 = new PrintSequenceRunnable(1, strings[3]);
+        MyRunnable task1 = new MyRunnable(atomicInteger, strings[0]);
+        MyRunnable task2 = new MyRunnable(atomicInteger, strings[1]);
+        MyRunnable task3 = new MyRunnable(atomicInteger, strings[2]);
+        MyRunnable task4 = new MyRunnable(atomicInteger, strings[3]);
 
         Thread t1 = new Thread(task1);
         Thread t2 = new Thread(task2);
