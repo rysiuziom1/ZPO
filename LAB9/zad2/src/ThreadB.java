@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public class ThreadB implements Runnable {
     private static int threadsCount = 0;
-    private boolean[] A;
+    private boolean[] primes;
     private final Iterator<Integer> iterator;
     private int n;
     private int threadIndex;
@@ -10,10 +10,10 @@ public class ThreadB implements Runnable {
     private static final Object lock = new Object();
     private static int currentThread = 0;
 
-    public ThreadB(boolean[] A, Iterator<Integer> iterator) {
-        this.A = A;
+    public ThreadB(boolean[] primes, Iterator<Integer> iterator) {
+        this.primes = primes;
         this.iterator = iterator;
-        this.n = A.length - 1;
+        this.n = primes.length - 1;
         this.threadIndex = threadsCount;
         threadsCount++;
     }
@@ -38,10 +38,10 @@ public class ThreadB implements Runnable {
                     lock.notifyAll();
                     if (index != 2) {
                         for (int i = index * index + 2 * threadIndex * index; i <= n; i += 2 * threadsCount * index)
-                            A[i] = false;
+                            primes[i] = false;
                     } else {
                         for (int i = index * index + threadIndex * index; i <= n; i += threadsCount * index)
-                            A[i] = false;
+                            primes[i] = false;
                     }
                 }
             }
