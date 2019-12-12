@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,18 +20,17 @@ public class MyRunnable implements Runnable {
     public void run() {
         synchronized (lock) {
             queue.offer(threadIndex);
-            if(queue.size() < threadsCount) {
+            if (queue.size() < threadsCount) {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            else lock.notifyAll();
+            } else lock.notifyAll();
         }
 
         synchronized (lock) {
-            while(positionInString < string.length()) {
+            while (positionInString < string.length()) {
                 int tmp = queue.peek();
                 if (threadIndex != tmp) {
                     try {

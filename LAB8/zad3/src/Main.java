@@ -1,25 +1,33 @@
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
+    private static final int threadsCount = 4;
+
     public static void main(String[] args) {
         String[] strings = {"aaaa", "bb", "ccccccccccccc", "dddddd"};
         AtomicInteger atomicInteger = new AtomicInteger(0);
 
-        MyRunnable t1 = new MyRunnable(atomicInteger, strings[0]);
-        MyRunnable t2 = new MyRunnable(atomicInteger, strings[1]);
-        MyRunnable t3 = new MyRunnable(atomicInteger, strings[2]);
-        MyRunnable t4 = new MyRunnable(atomicInteger, strings[3]);
+        List<Callable<String>> myCallableList = new ArrayList<>();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        for (int i = 0; i < threadsCount; i++) {
+            int finalI = i;
+            myCallableList.add(() -> {
+                new MyRunnable(atomicInteger, strings[finalI]).run();
+                return strings[finalI];
+            });
+        }
 
-        executorService.execute(t1);
-        executorService.execute(t2);
-        executorService.execute(t3);
-        executorService.execute(t4);
+        ExecutorService executorService = Executors.newFixedThreadPool(threadsCount);
+        try {
+            executorService.invokeAll(myCallableList);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        executorService.shutdown();
     }
 }
