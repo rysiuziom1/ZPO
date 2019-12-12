@@ -5,26 +5,26 @@ import java.util.Objects;
 public class Person {
     private int age;
     private String name;
-    private boolean sex;
+    private char sex;
     private String number;
 
     public Person() {
-        this("Jon", true, "empty", -1);
+        this("Jon", 'm', "empty", -1);
     }
 
     public Person(String name) {
-        this(name, true, "empty", -1);
+        this(name, 'm', "empty", -1);
     }
 
-    public Person(String name, boolean sex) {
+    public Person(String name, char sex) {
         this(name, sex, "empty", -1);
     }
 
-    public Person(String name, boolean sex, String number) {
+    public Person(String name, char sex, String number) {
         this(name, sex, number, -1);
     }
 
-    public Person(String name, boolean sex, String number, int age) {
+    public Person(String name, char sex, String number, int age) {
         this.name = name;
         this.sex = sex;
         this.number = number;
@@ -47,7 +47,11 @@ public class Person {
         this.name = name;
     }
 
-    public boolean getSex() {
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public char getSex() {
         return sex;
     }
 
@@ -75,7 +79,7 @@ public class Person {
         return Objects.hash(getAge(), getName(), getSex());
     }
 
-    public boolean equalsTwo(Object o) {
+    public boolean equalsWithAnnotation(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
