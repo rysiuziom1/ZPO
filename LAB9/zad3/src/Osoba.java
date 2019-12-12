@@ -1,15 +1,15 @@
-import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 public class Osoba implements Runnable{
     private int time;
     private static final double probability = 0.05;
     private static final Random rand = new Random();
-    private List<Widz> list;
+    private Queue<Widz> queue;
 
-    public Osoba(List<Widz> list) {
+    public Osoba(Queue<Widz> queue) {
         this.time = rand.nextInt(3) + 1;
-        this.list = list;
+        this.queue = queue;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Osoba implements Runnable{
             e.printStackTrace();
         }
         if(rand.nextDouble() <= probability) {
-            list.add(new Widz(list));
+            queue.offer(new Widz(queue));
         }
     }
 }

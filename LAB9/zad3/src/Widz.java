@@ -1,13 +1,13 @@
-import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 public class Widz implements Runnable {
     private static final double probability = 0.3;
     private static final Random rand = new Random();
-    private List<Widz> list;
+    private Queue<Widz> queue;
 
-    public Widz(List<Widz> list) {
-        this.list = list;
+    public Widz(Queue<Widz> queue) {
+        this.queue = queue;
     }
 
     @Override
@@ -18,6 +18,6 @@ public class Widz implements Runnable {
             e.printStackTrace();
         }
         if(rand.nextDouble() <= probability)
-            list.remove(this);
+            queue.poll();
     }
 }

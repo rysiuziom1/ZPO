@@ -1,27 +1,35 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.Queue;
+import java.util.concurrent.*;
 
 public class Main {
+    private static final int personsCount = 100;
+    private static final int minPersonsCount = 5;
+
     public static void main(String[] args) throws InterruptedException {
-        List<Widz> list = new ArrayList<>();
+        List<Callable<Integer>> list = new ArrayList<>();
+        Queue<Widz> queue = new ConcurrentLinkedQueue<>();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
-        for(int i = 0; i < 100; i++) {
-            executorService.execute(new Osoba(list));
+        for(int i = 0; i < personsCount; i++) {
+            int finalI = i;
+            list.add(() -> {
+                new Osoba(queue).run();
+                return finalI;
+            });
         }
+        executorService.invokeAll(list);
         executorService.shutdown();
         executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        System.out.println("Ilość widzów na początku: " + list.size());
-        if(list.size() < 5)
+        System.out.println("Ilość widzów na początku: " + queue.size());
+        if(queue.size() < minPersonsCount)
             System.out.println("Przepraszamy, filmu nie będzie");
         else {
             Runnable kino = () -> {
                 ExecutorService service = Executors.newCachedThreadPool();
-                for(Widz widz : list) {
+                for(Widz widz : queue) {
                     service.execute(widz);
                 }
                 service.shutdown();
@@ -30,8 +38,9 @@ public class Main {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(list.size() < 5) {
-                    System.out.println("BANDA FRAJERÓW! PIENIĄDZE NIE ZOSTANĄ ZWRÓCONE!\nZbyt mało widzów(" + list.size() +")");
+                System.out.println("Ilość widzów w połowie: " + queue.size());
+                if(queue.size() < minPersonsCount) {
+                    System.out.println("BANDA FRAJERÓW! PIENIĄDZE NIE ZOSTANĄ ZWRÓCONE!");
                     Thread.yield();
                 } else {
                     try {
@@ -39,7 +48,7 @@ public class Main {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("Koniec seansu\nWidzów: " + list.size());
+                    System.out.println("Koniec seansu");
                 }
             };
             new Thread(kino).start();

@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.Set;
 
 public class ThreadC implements Runnable {
     private boolean[] primes;
@@ -20,18 +19,16 @@ public class ThreadC implements Runnable {
     public void run() {
         int start = n / threadsCount * threadIndex;
         int end = start + n / threadsCount;
-        if(start < 2) start = 2;
-        System.out.println(start + " " + end);
-        while(iterator.hasNext()) {
+        if (start < 2) start = 2;
+        while (iterator.hasNext()) {
             int smallPrime = iterator.next();
             int low = (start / smallPrime) * smallPrime;
-            if(low < start) low += smallPrime;
-            if(start == 2) {
+            if (low < start) low += smallPrime;
+            if (start == 2) {
                 for (int i = low + smallPrime; i <= end; i += smallPrime) {
                     primes[i] = false;
                 }
-            }
-            else {
+            } else {
                 for (int i = low; i <= end; i += smallPrime) {
                     primes[i] = false;
                 }

@@ -11,7 +11,7 @@ public class HelloTask implements Runnable {
     @Override
     public void run() {
         synchronized (lock) {
-            while(threadIndex != threadsCount - 1) {
+            while (threadIndex != threadsCount - 1) {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {

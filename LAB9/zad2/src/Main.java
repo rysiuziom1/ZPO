@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +15,7 @@ public class Main {
         Iterator<Integer> iterator = smallPrimes.iterator();
         long startTime = System.currentTimeMillis();
         ExecutorService executorService = Executors.newFixedThreadPool(threadsCount);
-        for(int i = 0; i < threadsCount; i++) {
+        for (int i = 0; i < threadsCount; i++) {
             executorService.execute(new ThreadA(primes, iterator));
 //            executorService.execute(new ThreadB(primes, iterator));
 //            executorService.execute(new ThreadC(primes, smallPrimes.iterator()));
@@ -28,11 +27,13 @@ public class Main {
         int oneMillionCount = 0, tenMillionCount = 0, hundredMillionCount = 0;
         List<Integer> oneMillionList = new ArrayList<>();
         for (int i = 2; i < 1_000_000_000; i++) {
-            if (primes[i]) count++;
-            if(i < 1_000_000) oneMillionList.add(i);
-            else if(i == 1_000_000) oneMillionCount = count;
-            else if(i == 10_000_000) tenMillionCount = count;
-            else if(i == 100_000_000) hundredMillionCount = count;
+            if (primes[i]) {
+                count++;
+                if (i < 1_000_000) oneMillionList.add(i);
+            }
+            if (i == 1_000_000) oneMillionCount = count;
+            else if (i == 10_000_000) tenMillionCount = count;
+            else if (i == 100_000_000) hundredMillionCount = count;
         }
         System.out.println("1 Million: " + oneMillionCount);
         System.out.println("10 Million: " + tenMillionCount);
