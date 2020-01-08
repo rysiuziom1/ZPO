@@ -1,13 +1,15 @@
 import javassist.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) throws NotFoundException, IOException, CannotCompileException {
+    public static void main(String[] args) throws Exception {
         ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath("src");
         CtClass ctClass = pool.get("Factorial");
         List<CtMethod> m = Arrays.stream(ctClass.getDeclaredMethods())
                 .filter(e -> e.getName().contains("fact"))
@@ -20,6 +22,10 @@ public class Main {
                 ex.printStackTrace();
             }
         });
-        ctClass.writeFile();
+        ctClass.writeFile("out/production/zad2");
+
+        Loader loader = new Loader(pool);
+        Class c = loader.loadClass("Factorial");
+        c.getDeclaredMethod("main", String[].class).invoke(null, (Object) new String[0]);
     }
 }

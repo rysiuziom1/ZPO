@@ -23,18 +23,24 @@ public class LottoParser {
         List<Integer> numbers = new ArrayList<>();
         Connection connect = Jsoup.connect(url);
         Document document = connect.get();
-        String startMonthName = document
-                .selectFirst("#przedzial_czasu > div:nth-child(1) > select.form_miesiac > option:nth-child(" +
-                        + startDate.getMonthValue() +")").text();
-        String endMonthName = document
-                .selectFirst("#przedzial_czasu > div.dolny_select > select.form_miesiac > option:nth-child(" +
-                        + endDate.getMonthValue() +")").text();
-        String startDateString = startDate.getDayOfMonth() + "-" + startMonthName + "-" + startDate.getYear();
-        String endDateString = endDate.getDayOfMonth() + "-" + endMonthName + "-" + endDate.getYear();
-        String newUrl = url + "/losowania-od-" + startDateString + "-do-" + endDateString;
-        connect = Jsoup.connect(newUrl);
+        if(!url.contains("keno")) {
+            String startMonthName = document
+                    .selectFirst("#przedzial_czasu > div:nth-child(1) > select.form_miesiac > option:nth-child(" +
+                            +startDate.getMonthValue() + ")").text();
+            String endMonthName = document
+                    .selectFirst("#przedzial_czasu > div.dolny_select > select.form_miesiac > option:nth-child(" +
+                            +endDate.getMonthValue() + ")").text();
+            String startDateString = startDate.getDayOfMonth() + "-" + startMonthName + "-" + startDate.getYear();
+            String endDateString = endDate.getDayOfMonth() + "-" + endMonthName + "-" + endDate.getYear();
+            String newUrl = url + "/losowania-od-" + startDateString + "-do-" + endDateString;
+            connect = Jsoup.connect(newUrl);
+        }
+        else {
+            String newUrl = url + "/losowania-z-dnia-" + startDate.getDayOfMonth() + "." + startDate.getMonthValue() + "." + startDate.getYear();
+            connect = Jsoup.connect(newUrl);
+        }
         document = connect.get();
-        Elements elements = document.select("#list_of_last_drawings_wyniki_lotto > div > ul > li.numbers_in_list");
+        Elements elements = document.select("li.numbers_in_list, li.numbers_in_list_new_line > span.pierwsza_liczba_w_nowym_wierszu");
         elements.forEach(e -> numbers.add(Integer.parseInt(e.text())));
         return numbers;
     }
