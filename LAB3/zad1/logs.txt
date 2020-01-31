@@ -1,0 +1,48 @@
+paź 24, 2019 3:42:03 PM controllers.Controller$1 run
+INFO: Cyclist Jaciubek starts race.
+paź 24, 2019 3:42:06 PM controllers.Controller$1 run
+INFO: Cyclist Wawryk starts race.
+paź 24, 2019 3:42:08 PM controllers.Controller$1 run
+INFO: Cyclist Wijatkowski starts race.
+paź 24, 2019 3:42:11 PM controllers.Controller$1 run
+INFO: Cyclist Klos starts race.
+paź 24, 2019 3:42:13 PM controllers.Controller$1 run
+INFO: Cyclist Andrearczyk starts race.
+paź 24, 2019 3:42:15 PM controllers.Controller$1 run
+INFO: Cyclist Gut starts race.
+paź 24, 2019 3:42:16 PM controllers.Controller$2 run
+INFO: Cyclist Wawryk finished race with time: 255
+paź 24, 2019 3:42:17 PM controllers.Controller$2 run
+INFO: Cyclist Jaciubek finished race with time: 342
+paź 24, 2019 3:42:18 PM controllers.Controller$1 run
+INFO: Cyclist Maziarz starts race.
+paź 24, 2019 3:42:20 PM controllers.Controller$2 run
+INFO: Cyclist Wijatkowski finished race with time: 293
+paź 24, 2019 3:42:20 PM controllers.Controller$1 run
+INFO: Cyclist Knafel starts race.
+paź 24, 2019 3:42:23 PM controllers.Controller$1 run
+INFO: Cyclist Tomczuk starts race.
+paź 24, 2019 3:42:23 PM controllers.Controller$2 run
+INFO: Cyclist Andrearczyk finished race with time: 246
+paź 24, 2019 3:42:24 PM controllers.Controller$2 run
+INFO: Cyclist Klos finished race with time: 324
+paź 24, 2019 3:42:25 PM controllers.Controller$1 run
+INFO: Cyclist Skrzek starts race.
+paź 24, 2019 3:42:27 PM controllers.Controller$1 run
+INFO: Cyclist Rogaliński starts race.
+paź 24, 2019 3:42:29 PM controllers.Controller$2 run
+INFO: Cyclist Gut finished race with time: 332
+paź 24, 2019 3:42:30 PM controllers.Controller$2 run
+INFO: Cyclist Maziarz finished race with time: 294
+paź 24, 2019 3:42:30 PM controllers.Controller$1 run
+INFO: Cyclist Węgierski starts race.
+paź 24, 2019 3:42:33 PM controllers.Controller$2 run
+INFO: Cyclist Tomczuk finished race with time: 268
+paź 24, 2019 3:42:34 PM controllers.Controller$2 run
+INFO: Cyclist Knafel finished race with time: 336
+paź 24, 2019 3:42:37 PM controllers.Controller$2 run
+INFO: Cyclist Skrzek finished race with time: 300
+paź 24, 2019 3:42:40 PM controllers.Controller$2 run
+INFO: Cyclist Rogaliński finished race with time: 318
+paź 24, 2019 3:42:42 PM controllers.Controller$2 run
+INFO: Cyclist Węgierski finished race with time: 314

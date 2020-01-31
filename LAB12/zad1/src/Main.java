@@ -12,7 +12,7 @@ public class Main {
     private static final String user = "Jacek";
     private static final String password = "12345678";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -39,16 +39,21 @@ public class Main {
             File f = new File("dane.txt");
             Scanner fileReader = new Scanner(f);
             while (fileReader.hasNextLine()) {
-                String[] array = fileReader.nextLine().split(" ");
-                MySQLManager.addUser(array[0], array[1], array[2], Integer.parseInt(array[3]), conn);
+                String[] row = fileReader.nextLine().split(" ");
+                MySQLManager.addUser(row[0], row[1], row[2], Integer.parseInt(row[3]), conn);
             }
             fileReader.close();
             Scanner scn = new Scanner(System.in);
-            boolean check = true;
-            while (check) {
-                System.out.print("Co chcesz zrobić?\n1. Dodaj pracownika\n2. Wyświetl tabelę\n3. Wypisz średnie płace\n0. Zakończ\n> ");
-                int x = Integer.parseInt(scn.nextLine());
-                switch (x) {
+            boolean endFlag = true;
+            while (endFlag) {
+                System.out.print("Co chcesz zrobić?\n" +
+                        "1. Dodaj pracownika\n" +
+                        "2. Wyświetl tabelę\n" +
+                        "3. Wypisz średnie płace\n" +
+                        "0. Zakończ\n" +
+                        "> ");
+                int operationNumber = Integer.parseInt(scn.nextLine());
+                switch (operationNumber) {
                     case 1:
                         System.out.print("Podaj imie:\n> ");
                         String imie = scn.nextLine();
@@ -75,7 +80,7 @@ public class Main {
                         MySQLManager.showAvgSalary(conn);
                         break;
                     case 0:
-                        check = false;
+                        endFlag = false;
                         stmt.close();
                         conn.close();
                         break;
